@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const message = req.body.message;
   const username = req.body.username;
 
-  res?.socket?.server?.io.emit("send-message", { message, user: username });
+  res?.socket?.server?.io.emit("message", { message, user: username });
 
   res.end();
 }

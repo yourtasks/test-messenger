@@ -14,18 +14,15 @@ const Page = () => {
 
   useEffect(() => {
     if (!socket) {
-      console.log("socket not connected");
       return;
     }
 
-    socket.on("send-message", ({ message, user }) => {
-      console.log("socket working");
-      console.log(message, user);
+    socket.on("message", ({ message, user }) => {
       setChats((prev) => [...prev, { user, message }]);
     });
 
     return () => {
-      socket.off("send-message");
+      socket.off("message");
     };
   }, [socket]);
 
