@@ -15,8 +15,13 @@ const ioHandler = (req, res) => {
       addTrailingSlash: false,
     });
 
+    io.on("connection", () => {
+      console.log("[SERVER]: User connected");
+    });
+
     res.socket.server.io = io;
   }
+  console.log("first");
   res.end();
 };
 

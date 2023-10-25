@@ -23,6 +23,10 @@ const Page = () => {
       console.log(message, user);
       setChats((prev) => [...prev, { user, message }]);
     });
+
+    return () => {
+      socket.off("send-message");
+    };
   }, [socket]);
 
   if (!username) {
@@ -30,10 +34,10 @@ const Page = () => {
   }
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-full w-full">
       <ActiveUsers />
       <h1>{username}</h1>
-      <div className="flex flex-col gap-y-4 h-[300px] overflow-y-auto">
+      <div className="flex flex-col gap-y-4 max-h-[150px] overflow-y-auto">
         {chats.length > 0 &&
           chats.map((data, index) => (
             <Bubble key={index} username={username} data={data} />
